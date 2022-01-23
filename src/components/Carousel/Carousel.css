@@ -9,7 +9,7 @@
     left: 15%;
     top: 25vh;
     border-radius: 50%;
-    border: 1px solid;
+    /* border: 1px solid; */
     cursor: pointer;
     height: 30px;
     width: 30px;
@@ -20,7 +20,7 @@
     right: 15%;
     top: 25vh;
     border-radius: 50%;
-    border: 1px solid;
+    /* border: 1px solid; */
     cursor: pointer;
     height: 30px;
     width: 30px;
@@ -51,5 +51,12 @@
 .indicators > button.active {
     background-color: #f2f2f2;
     color: #023365;
+    border-color: #023365;
+    border-radius: 8px;
+}
+
+.indicators > button.inactive {
+    background-color: #023365;
+    color: #ffff;
     border-color: #023365;
 }
