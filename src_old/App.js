@@ -1,5 +1,5 @@
 import './App.css';
-import Carousell, { CarouselItem } from './components/Carousel/Carousel';
+import Carousel, { CarouselItem } from './components/Carousel/Carousel';
 import Form from './components/Form/Form';
 function App() {
   const sliderData = [
@@ -11,11 +11,11 @@ function App() {
     <div className="App">
       <div className="head">
         <h1>Career Opportunities</h1>
-        <Carousell>
+        <Carousel>
           {sliderData?.map((data) => (
             <CarouselItem key={data?.id} data={data}></CarouselItem>
           ))}
-        </Carousell>
+        </Carousel>
       </div>
       <Form></Form>
     </div>
