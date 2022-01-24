@@ -3,6 +3,7 @@ import './Carousel.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleRight, faAngleLeft, faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
 var globalActiveIndex;
+var intervalRes;
 export const CarouselItem = ({width, data}) => {
     const style = { width };
     return(
@@ -26,7 +27,7 @@ const Carousel = ({children}) => {
     };
     const updateAutoPlayIndex = (status) => {
         let newStatus = status;
-        if(newStatus == 0 || (newStatus > 0 && newStatus < children.length)) {
+        if(newStatus === 0 || (newStatus > 0 && newStatus < children.length)) {
             setActiveIndex(newStatus);
         } else if(newStatus >= children.length) {
             newStatus = 0;
@@ -37,21 +38,24 @@ const Carousel = ({children}) => {
     const updateAutoPlay = (status) => {
         setAutoPlayStatus(!status);
         let newStatus = !status;
-        if(newStatus) {
-            setInterval(() => {
+        if(newStatus === false) {
+            cancelInterval();
+        } else {
+            intervalRes = setInterval(() => {
                 if(globalActiveIndex >= children.length) {
                     globalActiveIndex = 0;
                 }
-                 else if(globalActiveIndex > 0) {
+                    else if(globalActiveIndex > 0) {
                     globalActiveIndex ++;
                 }  else {
                     globalActiveIndex = activeIndex + 1;
                 }
                 updateAutoPlayIndex(globalActiveIndex); 
-            }, 1000)
-        } else {
-            clearInterval();
+            }, 1000);
         }
+    };
+    const cancelInterval = () => {
+        window.clearInterval(intervalRes);
     };
     return(
         <div className="carousel">
