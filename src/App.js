@@ -1,5 +1,6 @@
 import './App.css';
 import Carousel, { CarouselItem } from './components/Carousel/Carousel';
+import Form from './components/Form/Form';
 function App() {
   const sliderData = [
     {id: 1, title: 'Item 1', img: 'https://picsum.photos/1024/300?random=1'},
@@ -16,6 +17,7 @@ function App() {
           ))}
         </Carousel>
       </div>
+      <Form></Form>
     </div>
   );
 }
