@@ -51,7 +51,7 @@ const Carousel = ({children}) => {
                     globalActiveIndex = activeIndex + 1;
                 }
                 updateAutoPlayIndex(globalActiveIndex); 
-            }, 1000);
+            }, 2000);
         }
     };
     const cancelInterval = () => {

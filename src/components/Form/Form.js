@@ -1,5 +1,5 @@
 import './Form.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 const Form = () => {
     const [firstName, setFirstName] = useState(''); // First Name 
     const updateFirstName = (name) => {
@@ -13,8 +13,8 @@ const Form = () => {
     const updateGender = value => {
         setGender(value);
     };
-    const [sliderValue , setSliderValue] = useState(0); // Rate Slider
-    const updateSlider = e =>{
+    const [sliderValue, setSliderValue] = useState(0); // Rate Slider
+    const updateSlider = e => {
         setSliderValue(e.target.value)
     };
     const [file, setFile] = useState(''); //File Upload
@@ -36,7 +36,7 @@ const Form = () => {
     };
     const handleSubmit = (ev) => {
         ev.preventDefault();
-        if(country === '0') {
+        if (country === '0') {
             setCountryError(true);
         } else {
             setCountryError(false);
@@ -70,27 +70,27 @@ const Form = () => {
                     <div className="row firstRow">
                         <div className="col-md-6 form-group">
                             <label htmlFor="firstName">First Name:*</label>
-                            <input type="text" name="firstName" id="firstName" className='form-control' required aria-required="true" value={firstName} onChange={(ev) => updateFirstName(ev.target.value)}/>
+                            <input type="text" name="firstName" id="firstName" className='form-control' required aria-required="true" value={firstName} onChange={(ev) => updateFirstName(ev.target.value)} />
                         </div>
                         <div className="col-md-6">
                             <label htmlFor="screenshot">Screen Shot:</label>
-                            <input type="file" name="screenshot" id="screenshot" className='form-control' value={file} onChange={(ev) => updateFile(ev.target.value)}/>
+                            <input type="file" name="screenshot" id="screenshot" className='form-control' value={file} onChange={(ev) => updateFile(ev.target.value)} />
                         </div>
                     </div>
                     <div className="row secondRow">
                         <div className="col-md-6">
                             <label htmlFor="lastName">Last Name:</label>
-                            <input type="text" name="lastName" id="lastName" className='form-control' value={lastName} onChange={(ev) => updateLastName(ev.target.value)}/>
+                            <input type="text" name="lastName" id="lastName" className='form-control' value={lastName} onChange={(ev) => updateLastName(ev.target.value)} />
                         </div>
                         <div className="col-md-6">
                             <label htmlFor="country">Country:*</label>{countryError}
-                            <select className={`${countryError ? 'form-control countryError': 'form-control'}`} id='country'  defaultValue={country} onChange={(ev) => updateCountry(ev.target.value)}>
+                            <select className={`${countryError ? 'form-control countryError' : 'form-control'}`} id='country' defaultValue={country} onChange={(ev) => updateCountry(ev.target.value)}>
                                 <option value="0">Select</option>
                                 <option value="1">India</option>
                                 <option value="2">South Africa</option>
                                 <option value="3">Australia</option>
                             </select>
-                            {countryError && <span htmlFor="country" style={{color: 'red'}}>Please Select a Country</span>}
+                            {countryError && <span htmlFor="country" style={{ color: 'red' }}>Please Select a Country</span>}
                         </div>
                     </div>
                     <div className="row thirdRow">
@@ -110,28 +110,54 @@ const Form = () => {
                         </div>
                         <div className="col-md-6 tnc">
                             <div className='terms'>
-                                <input className="form-check-input" type="checkbox" value="" id="tnc" onChange={(ev) => { updateTnC(ev.target.checked)}}/>
+                                <input className="form-check-input" type="checkbox" value="" id="tnc" onChange={(ev) => { updateTnC(ev.target.checked) }} />
                                 <label className="form-check-label" htmlFor="tnc">
                                     Agree to <span>Terms and Conditions</span>
                                 </label>
                             </div>
                             <div className='offers'>
-                            <input className="form-check-input" type="checkbox" value="" id="offers" onChange={(ev) => {updateOffers(ev.target.checked)}}/>
+                                <input className="form-check-input" type="checkbox" value="" id="offers" onChange={(ev) => { updateOffers(ev.target.checked) }} />
                                 <label className="form-check-label" htmlFor="offers">
                                     I consent to receive information about services and special offers by email
                                 </label>
                             </div>
-                            
+
                         </div>
                     </div>
                     <div className="row fourthRow">
-                        <div className="col-md-6 wrapper">
-                            <label htmlFor="rate">Rate yourself:*</label>
-                            <input className="slider_btn" aria-valuetext={sliderValue} aria-valuemin={0} aria-valuemax={100} orient="vertical" type="range" min="0"  max="100" id="rate" value={sliderValue} onChange={updateSlider} /><div id="result">{sliderValue}</div>
+                        {/* <div className="col-md-6 wrapper">
+                            <div className="contain">
+                                <div>
+                                <label htmlFor="rate" id="rateText">Rate yourself:*</label>
+                                </div>
+                                <div className="row">
+                                    <div className="grid"><span>0</span></div>
+                                    <input className="slider_btn" aria-valuetext={sliderValue} aria-valuemin={0} aria-valuemax={100} orient="vertical" type="range" min="0" value={sliderValue} onChange={updateSlider} max="100" id="rate" />
+                                    <datalist id="tickmarks">
+                                        <option value="0" label="0"></option>
+                                        <option value="100" label="10"></option>
+                                    </datalist>
+                                    <div className="grid"><span>100</span></div>
+                                </div>
+                            </div>
+                        </div> */}
+                        <div className="col-md-6 ratingGroup">
+                            <div className="contain">
+                                <div id="rateText">
+                                    <label htmlFor="rate">Rate yourself:*</label>
+                                </div>
+                            </div>
+                            <div className='slider-holder'>
+                                <div className="grid"><span id='min-range'>0</span><span id='max-range'>100</span></div>
+                                <div>
+                                <input className="slider_btn" aria-valuetext={sliderValue} aria-valuemin={0} aria-valuemax={100} orient="vertical" type="range" min="0" value={sliderValue} onChange={updateSlider} max="100" id="rate" list='tickmarks'/>
+                                <div className="grid-perc"><span id='min-range'>0%</span><span id='max-range'>100%</span></div>
+                                </div>
+                            </div>
                         </div>
                         <div className="col-md-6 btn-group">
-                        <button type="submit" className="btn btn-submit">Submit</button>
-                        <button type="button" className="btn btn-cancel" onClick={(ev) => cancel(ev)}>Cancel</button>
+                            <button type="submit" className="btn btn-submit">Submit</button>
+                            <button type="button" className="btn btn-cancel" onClick={(ev) => cancel(ev)}>Cancel</button>
                         </div>
                     </div>
                 </div>
